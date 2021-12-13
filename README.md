@@ -4,6 +4,12 @@
 # bRacketbusteRs
 
 <!-- badges: start -->
+
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/npeters1322/bRacketbusteRs?branch=master&svg=true)](https://ci.appveyor.com/project/npeters1322/bRacketbusteRs)
+[![R-CMD-check](https://github.com/npeters1322/bRacketbusteRs/workflows/R-CMD-check/badge.svg)](https://github.com/npeters1322/bRacketbusteRs/actions)
+[![Travis build
+status](https://travis-ci.com/npeters1322/bRacketbusteRs.svg?branch=master)](https://travis-ci.com/npeters1322/bRacketbusteRs)
 <!-- badges: end -->
 
 The goal of bRacketbusteRs is to provide basic functions to work with
