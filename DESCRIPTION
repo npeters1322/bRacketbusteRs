@@ -20,5 +20,6 @@ URL: https://github.com/npeters1322/bRacketbusteRs
 BugReports: https://github.com/npeters1322/bRacketbusteRs/issues
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    covr
 VignetteBuilder: knitr

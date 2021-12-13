@@ -10,6 +10,8 @@ status](https://ci.appveyor.com/api/projects/status/github/npeters1322/bRacketbu
 [![R-CMD-check](https://github.com/npeters1322/bRacketbusteRs/workflows/R-CMD-check/badge.svg)](https://github.com/npeters1322/bRacketbusteRs/actions)
 [![Travis build
 status](https://travis-ci.com/npeters1322/bRacketbusteRs.svg?branch=master)](https://travis-ci.com/npeters1322/bRacketbusteRs)
+[![Codecov test
+coverage](https://codecov.io/gh/npeters1322/bRacketbusteRs/branch/master/graph/badge.svg)](https://app.codecov.io/gh/npeters1322/bRacketbusteRs?branch=master)
 <!-- badges: end -->
 
 The goal of bRacketbusteRs is to provide basic functions to work with
