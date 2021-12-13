@@ -7,13 +7,14 @@ Maintainer: Nate Peters <npeters1322@gmail.com>
 Description: This package provides basic functions to work with Kaggle's
   2021 March Mania competition data. 
 License: MIT + file LICENSE
+Remotes: 
+    github::KoderKow/kaggler
 Imports:
     ggplot2,
     kaggler,
     miniUI,
     shiny,
     utils
-Remotes: KoderKow/kaggler
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
