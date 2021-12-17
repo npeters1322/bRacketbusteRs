@@ -5,11 +5,7 @@
 
 <!-- badges: start -->
 
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/npeters1322/bRacketbusteRs?branch=master&svg=true)](https://ci.appveyor.com/project/npeters1322/bRacketbusteRs)
 [![R-CMD-check](https://github.com/npeters1322/bRacketbusteRs/workflows/R-CMD-check/badge.svg)](https://github.com/npeters1322/bRacketbusteRs/actions)
-[![Travis build
-status](https://travis-ci.com/npeters1322/bRacketbusteRs.svg?branch=master)](https://travis-ci.com/npeters1322/bRacketbusteRs)
 [![Codecov test
 coverage](https://codecov.io/gh/npeters1322/bRacketbusteRs/branch/master/graph/badge.svg)](https://app.codecov.io/gh/npeters1322/bRacketbusteRs?branch=master)
 <!-- badges: end -->
@@ -26,38 +22,104 @@ following code in R:
 devtools::install_github('npeters1322/bRacketbusteRs')
 ```
 
-## Examples: NEED TO UPDATE
+## Using the Kaggle Data
 
-This is a basic example which shows you how to solve a common problem:
+To use this package, users must be authenticated to use the Kaggle API
+and must have accepted the terms of the competition. To set that up,
+please follow these steps:
+
+1.  Go to [Kaggle.com](https://www.kaggle.com/) and sign in or create an
+    account.
+
+2.  Find the March Mania competition by going to
+    [this](https://www.kaggle.com/c/ncaam-march-mania-2021) page. Go to
+    the data section and accept the terms if you have not already.
+
+3.  Click on the icon of your profile picture in the top right and then
+    click “Account.”
+
+4.  Scroll down to the “API” section and click “Create New API Token.”
+    It should automatically download a file called “kaggle.json” for
+    you, which contains your username and API key.
+
+5.  Save the “kaggle.json” file somewhere it will be easy to find later.
+
+6.  Copy the “kaggle.json” file to “\~/.kaggle/kaggle.json” or install
+    the [kaggler](https://github.com/KoderKow/kaggler) package and then
+    follow the steps listed
+    [here](https://koderkow.github.io/kaggler/articles/kaggler.html).
+
+7.  After that, you should be all set to use the package!
+
+## Examples of Using the Package
+
+To download the data and read in any specific files of interest, try
+this:
 
 ``` r
-library(bRacketbusteRs)
-## basic example code
+#download and read in data
+getNCAAMData()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Then, explore the other functions, such as one that will calculate
+per-game statistics for each team in each season. DIfferent data will be
+used depending on whether you specify stage 1 or stage 2 data from the
+competition. For example, you can calculate the mean, standard
+deviation, or both, depending on your input, for several statistics.
+Here’s an example of using both:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+#using stage 1 data, calculate the mean and sd of several statistics
+perGameStats(stage = 1, mean, sd)
+#> # A tibble: 6,187 x 58
+#>    Season TeamID meanScore sdScore meanOppScore sdOppScore meanFGM sdFGM meanFGA
+#>     <int>  <int>     <dbl>   <dbl>        <dbl>      <dbl>   <dbl> <dbl>   <dbl>
+#>  1   2003   1102      57.2   13.9          57        12.2     19.1  4.40    39.8
+#>  2   2003   1103      78.8   15.3          78.1      12.8     27.1  5.07    55.9
+#>  3   2003   1104      69.3   11.4          65         8.65    24.0  4.98    57.2
+#>  4   2003   1105      71.8   13.1          76.7      14.0     24.4  4.73    61.6
+#>  5   2003   1106      63.6   11.4          63.8      12.6     23.4  4.43    55.3
+#>  6   2003   1107      65.9   11.7          75.7      13.7     24.0  4.17    57.5
+#>  7   2003   1108      69.1    9.85         73.1      12.5     24.9  3.36    58.7
+#>  8   2003   1110      66.4    8.85         61.9       8.49    23.2  3.92    53.5
+#>  9   2003   1111      83.3   13.3          81.7      15.5     28.6  4.77    64.5
+#> 10   2003   1112      85.2   10.4          70.2       9.36    30.3  3.94    65.7
+#> # ... with 6,177 more rows, and 49 more variables: sdFGA <dbl>, meanFGM3 <dbl>,
+#> #   sdFGM3 <dbl>, meanFGA3 <dbl>, sdFGA3 <dbl>, meanFTM <dbl>, sdFTM <dbl>,
+#> #   meanFTA <dbl>, sdFTA <dbl>, meanOR <dbl>, sdOR <dbl>, meanDR <dbl>,
+#> #   sdDR <dbl>, meanAst <dbl>, sdAst <dbl>, meanTO <dbl>, sdTO <dbl>,
+#> #   meanStl <dbl>, sdStl <dbl>, meanBlk <dbl>, sdBlk <dbl>, meanPF <dbl>,
+#> #   sdPF <dbl>, meanOppFGM <dbl>, sdOppFGM <dbl>, meanOppFGA <dbl>,
+#> #   sdOppFGA <dbl>, meanOppFGM3 <dbl>, sdOppFGM3 <dbl>, meanOppFGA3 <dbl>, ...
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+The function also calculates the opponent statistics, too, so you
+additionally have a lot of data about their defense.
 
-You can also embed plots, for example:
+There are many other similar functions that provide other variables,
+such as tournament seeds, records, ranking statistics, and conference
+tournament winners. Additionally, there’s a function that essentially
+combines all of the other functions and produces a dataframe that
+contains a large amount of variables that might be used to predict games
+or make the process a little easier.
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+A bracket function is also in the works. This will allow you to provide
+your competition submission data (with the matchups and predicted
+probabilities) to the function. Then, the function will take your
+predictions and fill in a bracket for you that can be exported to print.
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+More functions will be made over time, and all will be updated for the
+2022 competition. Even if none of the other functions are useful to you,
+I hope the function to download and read in the data is and can help you
+explore the data on your own.
+
+## Notes
+
+-   The developer is is no way affiliated with Kaggle or the creation of
+    the kaggler package. Therefore, any changes to the API could cause
+    breaks that cannot be fixed by the developer.
+
+-   If you like to, or would like to, participate in other Kaggle
+    competitions, make sure to check out the
+    [kaggler](https://github.com/KoderKow/kaggler) package more to
+    better integrate R and Kaggle.
