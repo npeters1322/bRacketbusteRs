@@ -61,6 +61,14 @@ this:
 getNCAAMData()
 ```
 
+The data will be downloaded to your current working directory, so making
+a project specifically for this is the best idea. Note that it may take
+a little while to download all of the data. When the popup appears
+telling you to choose files to read in, you can click cancel if you
+don’t want to read any in right away; the data will still be downloaded
+for you to read in later, either on your own or through the above
+function again.
+
 Then, explore the other functions, such as one that will calculate
 per-game statistics for each team in each season. DIfferent data will be
 used depending on whether you specify stage 1 or stage 2 data from the
