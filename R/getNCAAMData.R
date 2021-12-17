@@ -1,6 +1,6 @@
 #' @title Download and/or Read in Kaggle's NCAA Data
 #'
-#' @description Function to download Kaggle's 2021 March Mania competition data (if not already downloaded) and read in selected datasets
+#' @description Function to download Kaggle's 2021 March Mania competition data (if not already downloaded) and/or read in selected datasets
 #' @return Vector of dataset names read in, as well as dataframes in the global environment for selected data. All datasets will also be downloaded to the current directory if not already there.
 #' @export
 #'
@@ -39,10 +39,12 @@ getNCAAMData <- function() {
 
         fileName <- substring(dataset, first = 19)
 
+        noCSV <- sub(".csv", "", fileName)
+
         if(startsWith(x = dataset, prefix = "MDataFiles_Stage1")) {
-          assign(paste0("Stage1", fileName), read.csv(paste0("MDataFiles_Stage1/", fileName)), envir = .GlobalEnv)
+          assign(paste0("Stage1", noCSV), read.csv(paste0("MDataFiles_Stage1/", fileName)), envir = .GlobalEnv)
         } else {
-          assign(paste0("Stage2", fileName), read.csv(paste0("MDataFiles_Stage2/", fileName)), envir = .GlobalEnv)
+          assign(paste0("Stage2", noCSV), read.csv(paste0("MDataFiles_Stage2/", fileName)), envir = .GlobalEnv)
         }
 
       }

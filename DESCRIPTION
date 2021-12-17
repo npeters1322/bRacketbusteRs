@@ -10,10 +10,14 @@ License: MIT + file LICENSE
 Remotes: 
     github::KoderKow/kaggler
 Imports:
+    dplyr,
     ggplot2,
     kaggler,
+    magrittr,
     miniUI,
+    rlang,
     shiny,
+    tidyr,
     utils
 Encoding: UTF-8
 LazyData: true

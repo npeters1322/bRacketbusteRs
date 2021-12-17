@@ -10,5 +10,5 @@ getNCAAMData()
 Vector of dataset names read in, as well as dataframes in the global environment for selected data. All datasets will also be downloaded to the current directory if not already there.
 }
 \description{
-Function to download Kaggle's 2021 March Mania competition data (if not already downloaded) and read in selected datasets
+Function to download Kaggle's 2021 March Mania competition data (if not already downloaded) and/or read in selected datasets
 }

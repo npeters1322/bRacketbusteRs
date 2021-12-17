@@ -1,6 +1,6 @@
 #' @title Create the NCAA Bracket Template
 #'
-#' @description Create the NCAA bracket with no teams filled in
+#' @description Create the NCAA bracket with no teams filled in, only seeds
 #' @return A ggplot object
 #' @export
 #'
@@ -30,7 +30,7 @@ bracketOutline <- function() {
 
   bracket <- ggplot() +
     geom_segment(aes(x = xStarts, y = yStarts, xend = xEnds, yend = yEnds)) +
-    geom_text(aes(x = seedX, y = seedY, label = seeds), size = 2) +
+    geom_text(aes(x = seedX, y = seedY, label = seeds), size = 3) +
     theme_void()
 
   return(bracket)

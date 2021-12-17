@@ -10,5 +10,5 @@ bracketOutline()
 A ggplot object
 }
 \description{
-Create the NCAA bracket with no teams filled in
+Create the NCAA bracket with no teams filled in, only seeds
 }
