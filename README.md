@@ -111,10 +111,22 @@ combines all of the other functions and produces a dataframe that
 contains a large amount of variables that might be used to predict games
 or make the process a little easier.
 
-A bracket function is also in the works. This will allow you to provide
-your competition submission data (with the matchups and predicted
-probabilities) to the function. Then, the function will take your
-predictions and fill in a bracket for you that can be exported to print.
+Another function produces an NCAA bracket that can have game winners
+left out, true game winners included, or predicted game winners (by you)
+filled in. For example, you can fill in the 2015 NCAA bracket with the
+true winners by using this code:
+
+``` r
+ncaaBracket(season = 2015, filled = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+After running the function, you can click zoom in the “Plots” tab in
+RStudio to make it full screen and read it easier. You can also then
+choose to export it and print it if you want. In the future, this
+function will be made more dynamic, allowing you to put your competition
+submission in and having the function fill in the bracket based on that.
 
 More functions will be made over time, and all will be updated for the
 2022 competition. Even if none of the other functions are useful to you,
