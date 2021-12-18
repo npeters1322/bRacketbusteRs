@@ -22,6 +22,11 @@ following code in R:
 devtools::install_github('npeters1322/bRacketbusteRs')
 ```
 
+If you get errors related to the kaggler package, try installing that
+package first by following [this
+link](https://github.com/KoderKow/kaggler) and using the code in the
+“Installation” section.
+
 ## Using the Kaggle Data
 
 To use this package, users must be authenticated to use the Kaggle API

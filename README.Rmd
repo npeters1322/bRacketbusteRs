@@ -31,6 +31,7 @@ You can install the development version of bRacketbusteRs by running the followi
 ``` r
 devtools::install_github('npeters1322/bRacketbusteRs')
 ```
+If you get errors related to the kaggler package, try installing that package first by following [this link](https://github.com/KoderKow/kaggler) and using the code in the "Installation" section.
 
 ## Using the Kaggle Data
 

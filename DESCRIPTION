@@ -16,6 +16,7 @@ Imports:
     magrittr,
     miniUI,
     rlang,
+    rvest,
     shiny,
     tidyr,
     utils
