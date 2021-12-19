@@ -85,6 +85,6 @@ More functions will be made over time, and all will be updated for the 2022 comp
 
 ## Notes
 
-* The developer is is no way affiliated with Kaggle or the creation of the kaggler package. Therefore, any changes to the API could cause breaks that cannot be fixed by the developer.
+* The developer is in no way affiliated with Kaggle or the creation of the kaggler package. Therefore, any changes to the API could cause breaks that cannot be fixed by the developer.
 
 * If you like to, or would like to, participate in other Kaggle competitions, make sure to check out the [kaggler](https://github.com/KoderKow/kaggler) package more to better integrate R and Kaggle.

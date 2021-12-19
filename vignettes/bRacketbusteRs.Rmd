@@ -15,6 +15,192 @@ knitr::opts_chunk$set(
 )
 ```
 
+To find the GitHub page for this package, go to [this link](https://github.com/npeters1322/bRacketbusteRs).
+
+## Introduction/Background
+
+As an avid college basketball fan, March Madness is one of my favorite times of the year. Paired with my interest in statistics, I enjoy utilizing data to help predict games, which led me to think of creating this package. Luckily, [Kaggle's March Mania](https://www.kaggle.com/c/ncaam-march-mania-2021) competition provides comprehensive data that can be used to predict games and compete in the competition itself. However, there are a few challenges when using this data. 
+
+One challenge I addressed in my package was that there wasn't a great way to get this specific data directly from Kaggle into R. Building off of the [kaggler](https://github.com/KoderKow/kaggler) package, which helped by providing a function to download all of the data into the current directory, my package contains a function that has that ability and also allows users to select specific files to read in. Selecting files is done in a Shiny gadget built into the function, so users do not have to know the names of the files and use read.csv. As a result, my package makes it simple to download and read in the data.
+
+Another challenge is that there are no one-line functions to calculate per-game statistics for teams. In the data, statistics are given for each game, which wouldn't be very helpful to predict games. Per-game statistics for a whole season, however, would be beneficial. Although you could use dplyr to manipulate the data, it takes several steps. With my function, which used a lot of dplyr manipulation, you can use one line of code to get per-game statistics for each team in each season, shortening the process. This is beneficial because you want to get through the data manipulation portion as quickly as possible so you can start to actually predict games.
+
+A third challenge in R is that creating a bracket can be very time consuming. As any March Madness fan knows, bracket-making is an important part of the event. While R users could use ggplot2, it would take a long time to put together. My package addresses this issue in two separate functions. One function allows users to create the outline of the bracket in one line of code, and then they can put in their own teams to fill it in. Otherwise, the other bracket function can be used. When calling the second function, teams are actually filled in for the season provided by the users automatically, and users can then also provide predictions that will be filled in for them; otherwise, the true outcomes will be filled in. This function relies a lot on ggplot2, but it makes it easy to create a bracket which would otherwise take awhile to correctly put together.
+
+My main motivation for creating this package was to make it easier and quicker to work with the competition data. While many of the processes would not be too difficult to do on your own, this package can make it a little quicker, saving a headache when trying to do data wrangling.
+
+## Examples of Using the Package
+
+You can install the development version of bRacketbusteRs by running the following code:
+
+``` r
+devtools::install_github('npeters1322/bRacketbusteRs')
+```
+
+If you get errors related to the kaggler package, try installing that package first by following [this link](https://github.com/KoderKow/kaggler) and using the code in the "Installation" section.
+
+After installing the package, load it using the following code:
+
 ```{r setup}
 library(bRacketbusteRs)
 ```
+
+To use this package, users must be authenticated to use the Kaggle API and must have accepted the terms of the competition. To set that up, please follow these steps:
+
+1. Go to [Kaggle.com](https://www.kaggle.com/) and sign in or create an account.
+
+2. Find the March Mania competition by going to [this](https://www.kaggle.com/c/ncaam-march-mania-2021) page. Go to the data section and accept the terms if you have not already.
+
+3. Click on the icon of your profile picture in the top right and then click "Account."
+
+4. Scroll down to the "API" section and click "Create New API Token." It should automatically download a file called "kaggle.json" for you, which contains your username and API key.
+
+5. Save the "kaggle.json" file somewhere it will be easy to find later.
+
+6. Copy the "kaggle.json" file to "~/.kaggle/kaggle.json" or install the [kaggler](https://github.com/KoderKow/kaggler) package and then follow the steps listed [here](https://koderkow.github.io/kaggler/articles/kaggler.html).
+
+7. After that, you should be all set to use the package!
+
+The next stop is to download the data. To do that, use the below code. When the Shiny gadget opens after running that code, you can read in any files if you want to (although you don't have to to use any of the other functions) by selecting them and clicking "Done." To use the other functions, the only thing that is required is that the files that were downloaded stay in the current working directory, so it would be beneficial to create a project for all of this work. The files should also be kept in their respective folders, as they are separated by stage number of the competition.
+
+```{r eval = FALSE}
+getNCAAMData()
+```
+
+After downloading the data, you can start working with any of the other functions. One gets the conference tournament winners for each season. To get the conference tournament winners from stage 1 (the default), run the following code:
+
+```{r}
+confWinners1 <- getConfTournWinners(stage = 1)
+head(confWinners1)
+```
+
+Stage 2 conference tournament winners can be received by doing this:
+
+```{r}
+confWinners2 <- getConfTournWinners(stage = 2)
+head(confWinners2)
+```
+
+Another function gets the tournament teams and their seeds for each season. You can get the teams and their seeds from the stage 1 data doing this:
+
+```{r}
+seed1 <- getSeeds(stage = 1)
+head(seed1)
+```
+
+If you'd rather have the seeds from the stage 2 data (which might be nice when predicting the latest tournament), you can run this code:
+
+```{r}
+seed2 <- getSeeds(stage = 2)
+head(seed2)
+```
+
+Another useful function gets the records (home wins/losses, away wins/losses, and neutral wins/losses, and their associated winning percentages) for each team in each season. To get that data from stage 1, perform the following:
+
+```{r}
+records1 <- getRecords(stage = 1)
+head(records1)
+```
+
+The same for stage 2 would be:
+
+```{r}
+records2 <- getRecords(stage = 2)
+head(records2)
+```
+
+Another function summarizes the rankings for each team in each season. The rankings are based on the different ranking systems (Massey, AP, RPI, among others) and can be summarized with multiple functions, like mean, median, or standard deviation, to name a few. To look at those, either go to the competition website and look at the "MMasseyOrdinals.csv" file in either stage or read in the "MMasseyOrdinals.csv" file from either stage and find the unique values. If you want to find the mean ranking for each team in each season based on all ranking systems, use "sysName" = "all," which is the default. The code would look like this for stage 1 data:
+
+```{r}
+allRanks1 <- getRanks(sysName = "all", stage = 1)
+#or
+allRanks2 <- getRanks(sysName = "all", stage = 1, mean)
+
+head(allRanks2)
+```
+
+For another scenario, if you want to get the mean and standard deviations for the rankings based on the Massey system and AP system in the stage 2 data, you can use the following code:
+
+```{r}
+someRanks <- getRanks(sysName = c("MAS", "AP"), stage = 2, mean, sd)
+head(someRanks)
+```
+
+The next function gets per-game statistics for each team in each season, like points per game, rebounds per game, or assists per game, just to name a few. However, it can also calculate other statistics for those team stats, like the median or standard deviation, for example. To get the mean statistics for each team in each season in the stage 1 data, use the following code:
+
+```{r}
+pg1 <- perGameStats(stage = 1)
+# or
+pg2 <- perGameStats(stage = 1, mean)
+
+head(pg2)
+```
+
+If you want the mean, median, and standard deviations for each statistic using the stage 2 data, you can use the following code:
+
+```{r}
+pgMedSD <- perGameStats(stage = 2, mean, median, sd)
+head(pgMedSD)
+```
+
+The final function that deals with team statistics uses many of the above functions to create the ultimate dataset with many possible predictors. It does include ranking data, so you can use any rankings you used in the getRanks function when specifying what systems to get aggregate from. This function only calculates the mean, so you do not provide any other statistics. So, if you wanted to get all of the mean stats and mean rankings based on all systems for stage 1 data, you could run:
+
+```{r}
+lot1 <- lottaStats(stage = 1, rankSysName = "all")
+#or
+lot2 <- lottaStats()
+head(lot2)
+```
+
+Or, if you wanted all of the mean stats and mean rankings, based on the Massey and AP systems, for stage 2, you can do this:
+
+```{r}
+lot3 <- lottaStats(stage = 2, rankSysName = c("MAS", "AP"))
+head(lot3)
+```
+
+All of the above functions except the getNCAAMData function return dataframes, so it is best to save those to meaningfully-named variables.
+
+To get the empty bracket, with only the seeds listed, you can enter the following in R:
+
+```{r fig.width = 10, fig.height=10}
+bracketOutline()
+```
+
+If you don't want to fill it in all by yourself, you can use the below function. This example gets the 2015 NCAA bracket, but it does not fill it, so the only part that is filled in is for the first round.
+
+```{r fig.width = 10, fig.height=10}
+ncaaBracket(season = 2015, filled = FALSE)
+```
+
+To fill it in with the actual winners, you can do the following:
+
+```{r fig.width = 10, fig.height=10}
+ncaaBracket(season = 2015, filled = TRUE)
+```
+
+To fill the tournament with your own predictions, do the following:
+
+```{r fig.width = 10, fig.height=10}
+predictions <- c("Hampton", "Dayton", "North Florida", "Ole Miss", "Kentucky", "Purdue", "West Virginia", "Maryland",
+                "Texas", "Notre Dame", "Indiana", "Kansas", "Wisconsin", "Oregon", "Arkansas", "North Carolina",
+                "Xavier", "Baylor", "Ohio State", "Arizona", "Villanova", "NC State", "Northern Iowa", "Louisville",
+                "Dayton", "Oklahoma", "Michigan State", "Virginia", "Duke", "St. John's", "Utah", "Georgetown",
+                "UCLA", "Iowa State", "Iowa", "Gonzaga", "Kentucky", "West Virginia", "Notre Dame", "Kansas",
+                "Wisconsin", "Arkansas", "Baylor", "Arizona", "Villanova", "Louisville", "Oklahoma", "Michigan State",
+                "Duke", "Utah", "Iowa State", "Gonzaga", "Kentucky", "Notre Dame", "Wisconsin", "Arizona", "Villanova",
+                "Michigan State", "Duke", "Iowa State", "Kentucky", "Wisconsin", "Michigan State", "Duke", "Kentucky",
+                "Duke", "Duke")
+
+ncaaBracket(season = 2015, filled = TRUE, fillData = predictions)
+```
+
+A note from the above code: the first four teams in the predictions vector are the predictions for the play-in games. They do not have to be provided, but if they are, make sure to list them first. The best way to make the predictions vector correctly is to look at the filled = FALSE bracket first. The order should be: first round winners on left side of bracket from top to bottom, first round winners on right side of bracket from top to bottom, and so on for each round, with the champion being last. Therefore, seeing the empty bracket first will help when getting the order correct.
+
+## Future Plans
+
+One of the future plans I have is making the bracket function (the one where teams are actually filled in) more dynamic. Right now, when providing predictions, you have to provide them in a very specific order. However, my plan is to make it more dynamic by allowing users to provide their competition submission file. Then, the function will take those predictions and fill the bracket based on that. A possible idea is that it would take your submission, find the first-round matchups using data I collected when making my bracket function, get the user's predicted winners, filter the submission file to get the losing teams out, find the next winners, and continue to filter and find winners until all rounds are done. It will take a lot of work, but it will make the function much more handy.
+
+Another future plan that is broader is to provide some statistical functions to predict games. Right now, the package mostly just helps with the data wrangling portion of the data. However, I'd like to expand it to also provide statistical methods, such as having a function to predict games based on a user-defined method, such as logistic regression or random forest. As I learn more about those topics, I plan to expand my package to include more statistical functions, making it even easier to compete in the competition or just make predictions for your own brackets.
+
+I would also like to create a function that can find similar teams to a given team. For example, finding other teams in the 2015-16 season that have similar statistics compared to Michigan State. I would most likely use my previous perGameStats function or lottaStats function to find teams with similar stats, so it might be fairly easy to implement. The long-term goal of this function would be to help with predictions. Say you can't decide between two teams or your prediction could almost go either way. Instead of making a random guess, you could find each team's previous opponents, get the one(s) most similar to the other team, and see how they fared. If they struggle to win against teams like the other, they might be more likely to struggle again in the game. Therefore, the function could be really useful in situations where it seemed like a close call before.

@@ -140,7 +140,7 @@ explore the data on your own.
 
 ## Notes
 
--   The developer is is no way affiliated with Kaggle or the creation of
+-   The developer is in no way affiliated with Kaggle or the creation of
     the kaggler package. Therefore, any changes to the API could cause
     breaks that cannot be fixed by the developer.
 
